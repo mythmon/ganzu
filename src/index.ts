@@ -32,4 +32,5 @@ export function loadConfig<
   return rv as R;
 }
 
-export { EnvSource } from "./source/env.ts";
+export type Infer<C extends ConfigDefinition<unknown>> = LoadConfigReturn<unknown, C>;
+export { EnvSource, } from "./source/env.ts";
