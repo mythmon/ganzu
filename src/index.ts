@@ -1,5 +1,3 @@
-export { EnvSource } from "./env.ts";
-
 export type ConfigDefinition<T> = {
   [K in keyof T]: FieldDefinition<T[K]>;
 };
@@ -36,6 +34,7 @@ export abstract class Source {
   abstract get(key: string, definition: FieldDefinition): unknown;
 }
 
+
 type LoadConfigReturn<T, C extends ConfigDefinition<T>> =
   C extends ConfigDefinition<infer R> ? R : never;
 
@@ -59,3 +58,5 @@ export function loadConfig<
   }
   return rv as R;
 }
+
+export { EnvSource } from "./env.ts";
