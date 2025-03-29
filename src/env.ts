@@ -1,5 +1,6 @@
 import { constantCase } from "change-case";
-import { FieldDefinition, Source } from "./index.ts";
+import { Source } from "./index.ts";
+import type { FieldDefinition } from "./field.ts";
 
 export class EnvSource extends Source {
   constructor(params: {
@@ -25,11 +26,14 @@ export class EnvSource extends Source {
     }
   }
 
-  get(key: string, definition: FieldDefinition): unknown {
+  get(key: string, definition: FieldDefinition):
+    | { found: false }
+    | { found: true, value: string, needsFromString: true }
+  {
     for (const alias of this.nameVariants(key, definition)) {
       const envVar = this.#env[alias];
-      if (envVar) return definition.fromString(envVar);
+      if (envVar) return { found: true, value: envVar, needsFromString: true };
     }
-    return undefined;
+    return { found: false };
   }
 }

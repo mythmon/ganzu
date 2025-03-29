@@ -26,6 +26,7 @@
     "vitest": "3.0.9"
   },
   "dependencies": {
-    "change-case": "^5.4.4"
+    "change-case": "^5.4.4",
+    "zod": "^3.24.2"
   }
 }
