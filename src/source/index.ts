@@ -1,5 +1,3 @@
-import type { FieldDefinition } from "../field.ts";
-
 export type SourceGetResult =
   | { found: false }
   | {
@@ -14,7 +12,7 @@ export type SourceGetResult =
     };
 
 export abstract class Source {
-  abstract get(key: string, definition: FieldDefinition): SourceGetResult;
+  abstract get(key: string): SourceGetResult;
 }
 
 export { EnvSource } from "./env.ts";
