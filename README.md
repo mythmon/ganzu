@@ -4,7 +4,7 @@ Load configuration from multiple sources, with support for predefined environmen
 
 ## Usage
 
-When using Ganzu, you define the configuration that you want to load, and separately define the sources that it should come from. By splitting this up, it allows you to use different loading strategies in different environments, such as using fixed values in staging, generated values in development, and environment variables in production.
+When using Ganzu, you define the configuration that you want to load, and separately define the sources that it should come from. By splitting this up, it allows you to use different loading strategies in different environments, such as using fixed values in testing, generated values in development, and environment variables in production.
 
 To define a configuration, make a plain JS object that uses `g` to define each field:
 
