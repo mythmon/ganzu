@@ -1,18 +1,13 @@
 import { constantCase } from "change-case";
 import { Source } from "./index.ts";
-import type { FieldDefinition } from "./field.ts";
+import type { FieldDefinition } from "../field.ts";
 
 export class EnvSource extends Source {
-  constructor(params: {
-    env?: Record<string, string | undefined>;
-    prefix?: string;
-  }) {
+  constructor(params: { prefix?: string }) {
     super();
-    this.#env = params.env ?? process.env;
     this.#prefix = params.prefix ?? "";
   }
 
-  #env: Record<string, string | undefined>;
   #prefix: string;
 
   *nameVariants(
@@ -26,12 +21,12 @@ export class EnvSource extends Source {
     }
   }
 
-  get(key: string, definition: FieldDefinition):
-    | { found: false }
-    | { found: true, value: string, needsFromString: true }
-  {
+  get(
+    key: string,
+    definition: FieldDefinition,
+  ): { found: false } | { found: true; value: string; needsFromString: true } {
     for (const alias of this.nameVariants(key, definition)) {
-      const envVar = this.#env[alias];
+      const envVar = process.env[alias];
       if (envVar) return { found: true, value: envVar, needsFromString: true };
     }
     return { found: false };

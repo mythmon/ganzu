@@ -3,6 +3,7 @@ import {
   FieldDefinitionString,
   type FieldDefinition,
 } from "./field.ts";
+import type { Source } from "./source/index.ts";
 
 export type ConfigDefinition<T> = {
   [K in keyof T & string]: FieldDefinition<T[K]>;
@@ -12,23 +13,6 @@ export const g = {
   string: () => new FieldDefinitionString(),
   number: () => new FieldDefinitionNumber(),
 };
-
-type FieldGetResult =
-  | { found: false }
-  | {
-      found: true;
-      value: string;
-      needsFromString: true;
-    }
-  | {
-      found: true;
-      value: unknown;
-      needsFromString: false;
-    };
-
-export abstract class Source {
-  abstract get(key: string, definition: FieldDefinition): FieldGetResult;
-}
 
 type LoadConfigReturn<T, C extends ConfigDefinition<T>> =
   C extends ConfigDefinition<infer R> ? R : never;
@@ -48,4 +32,4 @@ export function loadConfig<
   return rv as R;
 }
 
-export { EnvSource } from "./env.ts";
+export { EnvSource } from "./source/env.ts";

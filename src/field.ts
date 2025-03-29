@@ -1,5 +1,5 @@
 import { z, type ZodType } from "zod";
-import type { Source } from "./index.ts";
+import type { Source } from "./source/index.ts";
 
 export abstract class FieldDefinition<T = unknown> {
   aliases: string[] = [];

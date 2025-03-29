@@ -1,18 +1,17 @@
-import { expect, test } from "vitest";
-import { g, loadConfig, EnvSource } from "./index.ts";
+import { expect, test, describe } from "vitest";
+import { FixedSource } from "./source/index.ts";
+import { g, loadConfig } from "./index.ts";
 
-test("driving", () => {
-  const Config1 = {
-    port: g.number(),
-  } as const;
+describe("loadConfig", () => {
+  test("driving", () => {
+    const Config = {
+      port: g.number(),
+      host: g.string().alias("hostname"),
+    };
 
-  const Config2 = {
-    ...Config1,
-    host: g.string().alias("hostname"),
-  } as const;
-
-  let config = loadConfig(Config2, [
-    new EnvSource({ env: { HOSTNAME: "localhost", PORT: "8080" } })
-  ]);
-  expect(config).toEqual({ host: "localhost", port: 8080 });
+    let config = loadConfig(Config, [
+      new FixedSource({ hostname: "localhost", port: 8080 }),
+    ]);
+    expect(config).toEqual({ host: "localhost", port: 8080 });
+  });
 });
