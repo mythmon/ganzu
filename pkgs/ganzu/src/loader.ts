@@ -1,7 +1,7 @@
 import { ZodError } from "zod";
 import type { ConfigDefinition } from "./definition.ts";
 import type { FieldDefinition } from "./field.ts";
-import type { Source } from "./source/index.ts";
+import type { Source } from "./source.ts";
 
 export type LoadConfigReturn<T, C extends ConfigDefinition<T>> =
   C extends ConfigDefinition<infer R> ? R : never;

@@ -1,0 +1,24 @@
+
+
+> ganzu-json@0.0.3 build
+> tsup
+
+[1G[0K[34mCLI[39m Building entry: src/index.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.4.0
+[34mCLI[39m Using tsup config: /home/mythmon/src/ganzu/pkgs/json/tsup.config.ts
+[34mCLI[39m Target: node18
+[34mCLI[39m Cleaning output folder
+[34mCJS[39m Build start
+[34mESM[39m Build start
+[32mESM[39m [1mdist/index.js     [22m[32m1.04 KB[39m
+[32mESM[39m [1mdist/index.js.map [22m[32m1.99 KB[39m
+[32mESM[39m ⚡️ Build success in 9ms
+[32mCJS[39m [1mdist/index.cjs     [22m[32m2.66 KB[39m
+[32mCJS[39m [1mdist/index.cjs.map [22m[32m2.03 KB[39m
+[32mCJS[39m ⚡️ Build success in 9ms
+DTS Build start
+DTS ⚡️ Build success in 590ms
+DTS dist/index.d.cts 407.00 B
+DTS dist/index.d.ts  407.00 B
+[1G[0K⠙[1G[0K

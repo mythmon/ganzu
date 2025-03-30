@@ -1,7 +1,7 @@
 import { expect, test, describe } from "vitest";
 import { g } from "../src/definition.ts";
 import { loadConfig } from "../src/loader.ts";
-import { FixedSource } from "../src/source/fixed.ts";
+import { FixedSource } from "../src/source.ts";
 
 describe("loadConfig", () => {
   test("it works", () => {

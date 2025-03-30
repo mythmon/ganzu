@@ -2,8 +2,10 @@ import type { ConfigDefinition } from "./definition.ts";
 import type { LoadConfigReturn } from "./loader.ts";
 
 export type Infer<C extends ConfigDefinition<unknown>> = LoadConfigReturn<unknown, C>;
-export { EnvSource } from "./source/env.ts";
-export { loadConfig, type LoadConfigReturn } from "./loader.ts";
+export type { SourceGetResult  } from "./source.ts";
+export { EnvSource, FixedSource, Source  } from "./source.ts";
+export type { LoadConfigReturn } from "./loader.ts";
+export { loadConfig } from "./loader.ts";
 export { g } from "./definition.ts";
 
 // TODO
@@ -16,3 +18,9 @@ export { g } from "./definition.ts";
 // - struct values
 // - immutable field definitions
 // - custom error messages
+// - YAML support
+// - JSON support
+// - TOML support
+// - KDL support?
+// - 1 Password support
+// - .env support

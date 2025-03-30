@@ -1,7 +1,7 @@
 import { expect, test, describe } from "vitest";
 import { FieldDefinition } from "../src/field.ts";
 import { z } from "zod";
-import { FixedSource } from "../src/source/fixed.ts";
+import { FixedSource } from "../src/source.ts";
 
 describe("FieldDefinition", () => {
   class TestFieldDefinition extends FieldDefinition {

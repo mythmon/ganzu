@@ -6,6 +6,6 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "ganzu": "../.."
+    "ganzu": "../../pkgs/ganzu"
   }
 }
