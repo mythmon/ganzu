@@ -10,9 +10,7 @@ export { g } from "./definition.ts";
 // - booleans
 // - enums
 // - arbitrary zod?
-// - explain environment switching
 // - document environment variable naming
-// - make env parameter optional
 // - array values
 // - map values
 // - struct values

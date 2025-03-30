@@ -2,7 +2,7 @@ import { constantCase } from "change-case";
 import { Source, type SourceGetResult } from "./index.ts";
 
 export class EnvSource extends Source {
-  constructor(params: { prefix?: string }) {
+  constructor(params: { prefix?: string } = {}) {
     super();
     this.#prefix = params.prefix ?? "";
   }
@@ -12,7 +12,7 @@ export class EnvSource extends Source {
   *nameVariants(
     name: string,
   ): Generator<string, void> {
-    let prefixed = this.#prefix + name;
+    const prefixed = this.#prefix + name;
     yield prefixed;
     yield constantCase(prefixed);
   }
