@@ -85,6 +85,13 @@ const config = loadConfig(template, sources);
 
 In this way, you can adapt your configuration system to each environment without having to give up flexibility.
 
+## Sources
+
+Sources other than environment variables are available.
+
+* `FixedSource` is available in the `ganzu` package, which takes a JS object to pull configuration values from.
+* `JsonSource` is available in the `ganzu-json` package. It can load values from JSON files or JSON strings.
+
 ## Development
 
 ```sh

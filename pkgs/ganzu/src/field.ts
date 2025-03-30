@@ -53,6 +53,10 @@ export abstract class FieldDefinition<T = unknown> {
     for (const alias of [name, ...this._aliases]) {
       for (const source of sources) {
         const fromSource = source.get(alias);
+        if (!fromSource.ok) {
+          lastValidationProblem = fromSource.error;
+          continue;
+        }
         if (!fromSource.found) continue;
         let value = fromSource.value;
         if (fromSource.needsFromString) {

@@ -1,0 +1,39 @@
+{
+  "name": "ganzu-json",
+  "version": "0.0.3",
+  "description": "JSON source for Ganzu",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "npm run t -- --run",
+    "t": "vitest",
+    "build": "tsup",
+    "publish-package": "npm run build && npm publish --provenance --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mythmon/ganzu.git"
+  },
+  "keywords": [
+    "ganzu"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mythmon/ganzu/issues"
+  },
+  "homepage": "https://github.com/mythmon/ganzu#readme",
+  "dependencies": {
+    "ganzu": "0.0.3"
+  },
+  "devDependencies": {
+    "@tsconfig/node-lts": "^22.0.1",
+    "@tsconfig/node-ts": "^23.6.1",
+    "@tsconfig/recommended": "^1.0.8",
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/node": "^22.13.13",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "3.0.9"
+  }
+}

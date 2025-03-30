@@ -1,17 +1,21 @@
 import { constantCase } from "change-case";
 
 export type SourceGetResult =
-  | { found: false }
+  | { ok: true, found: false }
   | {
-      found: true;
-      value: string;
-      needsFromString: true;
-    }
-  | {
-      found: true;
-      value: unknown;
-      needsFromString: false;
-    };
+    ok: true;
+    found: true;
+    value: string;
+    needsFromString: true;
+  } | {
+    ok: true;
+    found: true;
+    value: unknown;
+    needsFromString: false;
+  } | {
+    ok: false;
+    error: Error;
+  };
 
 export abstract class Source {
   abstract get(key: string): SourceGetResult;
@@ -27,9 +31,9 @@ export class FixedSource<T extends Record<string, unknown>> extends Source {
 
   get(key: string): SourceGetResult {
     if (key in this.values) {
-      return { found: true, value: this.values[key], needsFromString: false };
+      return { ok: true, found: true, value: this.values[key], needsFromString: false };
     }
-    return { found: false };
+    return { ok: true, found: false };
   }
 }
 
@@ -52,8 +56,8 @@ export class EnvSource extends Source {
   get(key: string): SourceGetResult {
     for (const alias of this.nameVariants(key)) {
       const envVar = process.env[alias];
-      if (envVar) return { found: true, value: envVar, needsFromString: true };
+      if (envVar) return { ok: true, found: true, value: envVar, needsFromString: true };
     }
-    return { found: false };
+    return { ok: true, found: false };
   }
 }
