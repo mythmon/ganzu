@@ -14,9 +14,7 @@ describe("loadConfig", () => {
       b: g.string(),
     };
 
-    let config = loadConfig(Config, [
-      new FixedSource({ a: "5", b: "10" }),
-    ]);
+    let config = loadConfig(Config, []);
     expectTypeOf(config).toEqualTypeOf<{ a: number; b: string }>();
   });
 
@@ -26,11 +24,24 @@ describe("loadConfig", () => {
       y: g.number(),
     };
 
-    let config = loadConfig(Config, [new EnvSource({ env: { a: "1", b: "2" } })]);
+    let config = loadConfig(Config, []);
     expectTypeOf(config).toEqualTypeOf<{ x: string; y: number }>();
     expectTypeOf(config.x).toEqualTypeOf<string>();
     expectTypeOf(config.y).toEqualTypeOf<number>();
   });
+
+  test("optional fields are marked as nullable", () => {
+    const Config = {
+      x: g.string().optional(),
+      y: g.number().optional(),
+    };
+
+    let config = loadConfig(Config, []);
+    expectTypeOf(config).toEqualTypeOf<{ x: string | null; y: number | null }>();
+    expectTypeOf(config.x).toEqualTypeOf<string | null>();
+    expectTypeOf(config.y).toEqualTypeOf<number | null>();
+  });
+
 });
 
 describe("Infer", () => {

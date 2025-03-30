@@ -44,6 +44,16 @@ const Config = { /* ... */ };
 type Config = Infer<typeof Config>;
 ```
 
+### Field configuration
+
+Configurations are made up of several _fields_, each of which can be configured
+in several ways. Fields are required by default.
+
+- `.default()` sets a default value for a field if one isn't found in any source.
+- `.constant()` sets a value for a field that will not be overridden by any source.
+- `.optional()` is an alias for `.default(null)`, and the type of the field must allow null.
+- `.alias()` provides an extra name that will be used when searching for values in a source. It may be repeated.
+
 ## Development
 
 ```sh
