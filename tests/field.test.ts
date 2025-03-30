@@ -1,7 +1,7 @@
 import { expect, test, describe } from "vitest";
-import { FieldDefinition } from "./field.ts";
+import { FieldDefinition } from "../src/field.ts";
 import { z } from "zod";
-import { FixedSource } from "./source/fixed.ts";
+import { FixedSource } from "../src/source/fixed.ts";
 
 describe("FieldDefinition", () => {
   class TestFieldDefinition extends FieldDefinition {
@@ -9,7 +9,7 @@ describe("FieldDefinition", () => {
       super(z.any(), [], undefined, undefined);
     }
     clone(): FieldDefinition {
-      let next = new TestFieldDefinition();
+      const next = new TestFieldDefinition();
       next._aliases = [...this._aliases];
       next._constant = this._constant;
       next._default = this._default;

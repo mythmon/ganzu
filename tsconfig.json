@@ -5,11 +5,16 @@
     "@tsconfig/node-ts/tsconfig.json",
     "@tsconfig/strictest/tsconfig.json"
   ],
-  "include": ["./src/**/*.ts"],
-  "exclude": ["**/*.test.ts", "**/*.test-d.ts"],
+  "include": ["./src/**/*.ts", "./tests/**/*.ts"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "outDir": "./dist/",
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

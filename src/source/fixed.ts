@@ -11,8 +11,7 @@ export class FixedSource<T extends Record<string, unknown>> extends Source {
   get(key: string): SourceGetResult {
     if (key in this.values) {
       return { found: true, value: this.values[key], needsFromString: false };
-    } else {
-      return { found: false };
     }
+    return { found: false };
   }
 }

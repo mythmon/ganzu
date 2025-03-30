@@ -1,9 +1,8 @@
 import { test, expectTypeOf, describe } from "vitest";
-import { FixedSource } from "./source/fixed.ts";
-import { ConfigDefinition, g } from "./definition.ts";
-import { FieldDefinition } from "./field.ts";
-import { loadConfig } from "./loader.ts";
-import { Infer } from "./index.ts";
+import type { ConfigDefinition } from "../src/definition.ts";
+import { g } from "../src/definition.ts";
+import { loadConfig } from "../src/loader.ts";
+import type { Infer } from "../src/index.ts";
 
 describe("loadConfig", () => {
   test("config type is passed through", () => {
@@ -17,7 +16,7 @@ describe("loadConfig", () => {
       b: g.string(),
     };
 
-    let config = loadConfig(Config, []);
+    const config = loadConfig(Config, []);
     expectTypeOf(config).toEqualTypeOf<{ a: number; b: string }>();
   });
 
@@ -27,7 +26,7 @@ describe("loadConfig", () => {
       y: g.number(),
     };
 
-    let config = loadConfig(Config, []);
+    const config = loadConfig(Config, []);
     expectTypeOf(config).toEqualTypeOf<{ x: string; y: number }>();
     expectTypeOf(config.x).toEqualTypeOf<string>();
     expectTypeOf(config.y).toEqualTypeOf<number>();
@@ -39,7 +38,7 @@ describe("loadConfig", () => {
       y: g.number().optional(),
     };
 
-    let config = loadConfig(Config, []);
+    const config = loadConfig(Config, []);
     expectTypeOf(config).toEqualTypeOf<{ x: string | null; y: number | null }>();
     expectTypeOf(config.x).toEqualTypeOf<string | null>();
     expectTypeOf(config.y).toEqualTypeOf<number | null>();
