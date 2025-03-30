@@ -34,12 +34,12 @@ export abstract class FieldDefinition<T = unknown> {
 
   default(value: T) {
     const validated = this._validator.parse(value);
-    return this.#withChanges((f) => f._default = validated);
+    return this.#withChanges((f) => { f._default = validated; });
   }
 
   constant(value: T) {
     const validated = this._validator.parse(value);
-    return this.#withChanges((f) => f._constant = validated);
+    return this.#withChanges((f) => { f._constant = validated; });
   }
 
   optional<Tn extends T | null>(): FieldDefinition<Tn> {
@@ -52,21 +52,20 @@ export abstract class FieldDefinition<T = unknown> {
     let lastValidationProblem = null;
     for (const alias of [name, ...this._aliases]) {
       for (const source of sources) {
-        let fromSource = source.get(alias);
+        const fromSource = source.get(alias);
         if (!fromSource.found) continue;
         let value = fromSource.value;
         if (fromSource.needsFromString) {
           value = this.fromString(fromSource.value);
         }
-        let validation = this._validator.safeParse(value);
+        const validation = this._validator.safeParse(value, { path: [alias]});
         if (validation.success) {
           return validation.data;
-        } else {
-          lastValidationProblem = validation.error;
         }
+        lastValidationProblem = validation.error;
       }
     }
-    if (lastValidationProblem) throw new Error(lastValidationProblem.message);
+    if (lastValidationProblem) throw lastValidationProblem;
 
     if (this._default !== undefined) return this._default;
 
