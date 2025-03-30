@@ -1,6 +1,7 @@
 import { expect, test, describe } from "vitest";
-import { FixedSource } from "./source/index.ts";
-import { g, loadConfig } from "./index.ts";
+import { g } from "./definition";
+import { loadConfig } from "./loader";
+import { FixedSource } from "./source/fixed";
 
 describe("loadConfig", () => {
   test("driving", () => {

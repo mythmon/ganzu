@@ -1,6 +1,9 @@
 import { test, expectTypeOf, describe } from "vitest";
-import { g, type ConfigDefinition, loadConfig, EnvSource, Infer } from "./index.ts";
 import { FixedSource } from "./source/fixed.ts";
+import { ConfigDefinition, g } from "./definition.ts";
+import { FieldDefinition } from "./field.ts";
+import { loadConfig } from "./loader.ts";
+import { Infer } from "./index.ts";
 
 describe("loadConfig", () => {
   test("config type is passed through", () => {

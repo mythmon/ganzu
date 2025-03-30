@@ -54,6 +54,35 @@ in several ways. Fields are required by default.
 - `.optional()` is an alias for `.default(null)`, and the type of the field must allow null.
 - `.alias()` provides an extra name that will be used when searching for values in a source. It may be repeated.
 
+### Configuration Environments
+
+Since the configuration objects are plain JS objects, they can be manipulated at runtime, and specifically you can define multiple configurations, and choose one dynamically based on where your code is running.
+
+For example, consider a service that needs to load a value from an S3 bucket. In production the name of the bucket to use comes from an environment variable. In development however, everyone will use the same mock bucket name. Configuring this as an environment variable for each developer can be tedious, especially if new values are introduced.
+
+To handle this situation, define two configurations:
+
+```ts
+const BaseConfig = {
+  port: g.number(),
+  bucketName: g.string(),
+}
+
+const DevConfig = {
+  ...BaseConfig,
+  bucketName: g.string().default("mock-bucket"),
+};
+```
+
+Now, when you load your configuration, you can choose which of these values to use
+
+```js
+const template = shouldUseDev() ? DevConfig : BaseConfig;
+const config = loadConfig(template, sources);
+```
+
+In this way, you can adapt your configuration system to each environment without having to give up flexibility.
+
 ## Development
 
 ```sh
@@ -65,7 +94,7 @@ Tests are written using [Vitest](https://vitest.dev/), and include type-level te
 
 ## Inspiration
 
-Ganzu is inspired by [django-configurations](https://django-configurations.readthedocs.io/en/stable/).
+Ganzu is inspired by [django-configurations](https://django-configurations.readthedocs.io/en/stable/) and [zod-config](https://github.com/alexmarqs/zod-config).
 
 ## Name
 
