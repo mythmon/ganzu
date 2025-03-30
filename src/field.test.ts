@@ -5,7 +5,16 @@ import { FixedSource } from "./source/fixed.ts";
 
 describe("FieldDefinition", () => {
   class TestFieldDefinition extends FieldDefinition {
-    validator = z.any();
+    constructor() {
+      super(z.any(), [], undefined, undefined);
+    }
+    clone(): FieldDefinition {
+      let next = new TestFieldDefinition();
+      next._aliases = [...this._aliases];
+      next._constant = this._constant;
+      next._default = this._default;
+      return next;
+    }
     fromString(string: string): unknown {
       return string;
     }
@@ -15,17 +24,25 @@ describe("FieldDefinition", () => {
     test("should load a value from a fixed source", () => {
       const source = new FixedSource({ a: 1 });
       const field = new TestFieldDefinition();
-      const value = field.loadValue("a", [source])
+      const value = field.loadValue("a", [source]);
       expect(value).toBe(1);
     });
   });
 
-  test(".alias()", () => {
-    const source1 = new FixedSource({ a: 1 });
-    const source2 = new FixedSource({ aButLonger: 2 });
-    const field = new TestFieldDefinition().alias("aButLonger");
-    expect(field.loadValue("a", [source1])).toEqual(1);
-    expect(field.loadValue("a", [source2])).toEqual(2);
+  describe(".alias()", () => {
+    test("should work", () => {
+      const source1 = new FixedSource({ a: 1 });
+      const source2 = new FixedSource({ aButLonger: 2 });
+      const field = new TestFieldDefinition().alias("aButLonger");
+      expect(field.loadValue("a", [source1])).toEqual(1);
+      expect(field.loadValue("a", [source2])).toEqual(2);
+    });
+
+    test("should return a new instance", () => {
+      const field1 = new TestFieldDefinition();
+      const field2 = field1.alias("alias");
+      expect(field1).not.toBe(field2);
+    });
   });
 
   describe(".default()", () => {
@@ -41,6 +58,12 @@ describe("FieldDefinition", () => {
       const source = new FixedSource({ a: 3, b: 2 });
       const value = field.loadValue("a", [source]);
       expect(value).toBe(3);
+    });
+
+    test("should return a new instance", () => {
+      const field1 = new TestFieldDefinition();
+      const field2 = field1.default(1);
+      expect(field1).not.toBe(field2);
     });
   });
 
@@ -58,21 +81,33 @@ describe("FieldDefinition", () => {
       const value = field.loadValue("a", [source]);
       expect(value).toBe(1);
     });
+
+    test("should return a new instance", () => {
+      const field1 = new TestFieldDefinition();
+      const field2 = field1.constant(1);
+      expect(field1).not.toBe(field2);
+    });
   });
 
-    describe(".optional()", () => {
-      test("should return null if no value provided", () => {
-        const field = new TestFieldDefinition().optional();
-        const source = new FixedSource({ b: 2 });
-        const value = field.loadValue("a", [source]);
-        expect(value).toBe(null);
-      });
-
-      test("should use the value from the source if found", () => {
-        const field = new TestFieldDefinition().optional();
-        const source = new FixedSource({ a: 3, b: 2 });
-        const value = field.loadValue("a", [source]);
-        expect(value).toBe(3);
-      });
+  describe(".optional()", () => {
+    test("should return null if no value provided", () => {
+      const field = new TestFieldDefinition().optional();
+      const source = new FixedSource({ b: 2 });
+      const value = field.loadValue("a", [source]);
+      expect(value).toBe(null);
     });
+
+    test("should use the value from the source if found", () => {
+      const field = new TestFieldDefinition().optional();
+      const source = new FixedSource({ a: 3, b: 2 });
+      const value = field.loadValue("a", [source]);
+      expect(value).toBe(3);
+    });
+
+    test("should return a new instance", () => {
+      const field1 = new TestFieldDefinition();
+      const field2 = field1.optional();
+      expect(field1).not.toBe(field2);
+    });
+  });
 });

@@ -9,6 +9,6 @@ export type ConfigDefinition<T> = {
 };
 
 export const g = {
-  string: () => new FieldDefinitionString(),
-  number: () => new FieldDefinitionNumber(),
+  string: () => FieldDefinitionString.createDefault(),
+  number: () => FieldDefinitionNumber.createDefault(),
 };

@@ -4,7 +4,7 @@ import { loadConfig } from "./loader";
 import { FixedSource } from "./source/fixed";
 
 describe("loadConfig", () => {
-  test("driving", () => {
+  test("it works", () => {
     const Config = {
       port: g.number(),
       host: g.string().alias("hostname"),

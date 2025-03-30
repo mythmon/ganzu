@@ -54,13 +54,15 @@ in several ways. Fields are required by default.
 - `.optional()` is an alias for `.default(null)`, and the type of the field must allow null.
 - `.alias()` provides an extra name that will be used when searching for values in a source. It may be repeated.
 
+Fields are immutable, so calling these methods returns a new instsance with the change applied, leaving the original unmodified. That also means these methods are chainable.
+
 ### Configuration Environments
 
 Since the configuration objects are plain JS objects, they can be manipulated at runtime, and specifically you can define multiple configurations, and choose one dynamically based on where your code is running.
 
 For example, consider a service that needs to load a value from an S3 bucket. In production the name of the bucket to use comes from an environment variable. In development however, everyone will use the same mock bucket name. Configuring this as an environment variable for each developer can be tedious, especially if new values are introduced.
 
-To handle this situation, define two configurations:
+To handle this situation, define two configurations. The second definition should build off the first using the spread operator (`...`) and customize each field as needed. Because fields are immutable, configuring them won't affect the base configuration.
 
 ```ts
 const BaseConfig = {
@@ -70,7 +72,7 @@ const BaseConfig = {
 
 const DevConfig = {
   ...BaseConfig,
-  bucketName: g.string().default("mock-bucket"),
+  bucketName: BaseConfig.bucketName.default("mock-bucket"),
 };
 ```
 
