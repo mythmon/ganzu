@@ -18,7 +18,6 @@ jobs:
         with:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npx turbo build
-      - run: npm --workspace ganzu publish-package
+      - run: npx turbo publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

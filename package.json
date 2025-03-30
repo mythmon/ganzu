@@ -4,9 +4,7 @@
     "pkgs/*"
   ],
   "devDependencies": {
+    "turbo": "^2.4.4"
   },
-  "dependencies": {
-    "change-case": "^5.4.4",
-    "zod": "^3.24.2"
-  }
+  "packageManager": "npm@10.9.2"
 }
