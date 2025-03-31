@@ -3,4 +3,4 @@ dist/
 node_modules/
 .env*
 tsconfig.vitest-temp.json
-.turbo/
+.turbo

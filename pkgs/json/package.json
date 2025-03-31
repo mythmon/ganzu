@@ -1,6 +1,6 @@
 {
   "name": "ganzu-json",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "JSON source for Ganzu",
   "type": "module",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/mythmon/ganzu#readme",
   "dependencies": {
-    "ganzu": "0.0.3"
+    "ganzu": "0.0.4"
   },
   "devDependencies": {
     "@tsconfig/node-lts": "^22.0.1",
