@@ -9,7 +9,8 @@
       "dependsOn": ["^build", "^test"]
     },
     "publish-package": {
-      "dependsOn": ["^build", "^test"]
+      "dependsOn": ["^build", "^test"],
+      "env": ["NODE_AUTH_TOKEN"]
     }
   }
 }
