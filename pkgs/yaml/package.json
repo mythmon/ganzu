@@ -1,6 +1,6 @@
 {
   "name": "ganzu-yaml",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Yaml source for Ganzu",
   "type": "module",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/mythmon/ganzu#readme",
   "dependencies": {
-    "ganzu": "0.0.4",
+    "ganzu": "0.0.5",
     "yaml": "^2.7.1"
   },
   "devDependencies": {

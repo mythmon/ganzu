@@ -1,6 +1,6 @@
 {
   "name": "ganzu",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "description": "Organized configuration",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "t": "vitest --typecheck",
     "build": "tsup",
     "clean": "rimraf dist",
-    "publish-package": "npm run build && npm publish --provenance --access public"
+    "publish-package": "rm README.md && cp ../../README.md ./README.md && npm run build && npm publish --provenance --access public"
   },
   "repository": {
     "type": "git",
