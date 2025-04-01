@@ -14,9 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/mythmon/ganzu.git"
   },
-  "keywords": [
-    "ganzu"
-  ],
+  "keywords": ["ganzu", "ganzu-source"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mythmon/ganzu/issues"
