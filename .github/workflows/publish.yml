@@ -18,6 +18,6 @@ jobs:
         with:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npx turbo publish-package
+      - run: npx turbo run publish-package -- --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

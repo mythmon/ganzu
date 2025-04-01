@@ -9,7 +9,7 @@
     "t": "vitest --typecheck",
     "build": "tsup",
     "clean": "rimraf dist",
-    "publish-package": "npm run build && npm publish --provenance --access public"
+    "publish-package": "npm run build && npm publish --access public"
   },
   "repository": {
     "type": "git",
