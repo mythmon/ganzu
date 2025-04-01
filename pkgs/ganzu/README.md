@@ -89,6 +89,9 @@ In this way, you can adapt your configuration system to each environment without
 
 Besides `EnvSource`, this package also provides `FixedSource`, which loads its values from a JS object. It's primarily useful in tests.
 
-Other sources can be defined by implementing the `Source` interface. See [`ganzu-json`](https://github.com/mythmon/ganzu/tree/main/pkgs/json#readme) and [`ganzu-yaml`](https://github.com/mythmon/ganzu/tree/main/pkgs/yaml#readme) for examples on how to do that.
+Other sources can be defined by implementing the `Source` interface. See [`ganzu-json`][json-src] and [`ganzu-yaml`][yaml-src] for examples on how to do that.
+
+[json-src]: https://github.com/mythmon/ganzu/blob/main/pkgs/json/src/index.ts
+[yaml-src]: https://github.com/mythmon/ganzu/blob/main/pkgs/yaml/src/index.ts
 
 To find more sources, see the [`ganzu-source` tag on NPM](https://www.npmjs.com/search?q=keywords:ganzu).
