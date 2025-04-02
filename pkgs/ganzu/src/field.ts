@@ -1,13 +1,15 @@
 import { z, type ZodType } from "zod";
 import type { Source } from "./source.ts";
 
+const CouldNotConvert = Symbol("CouldNotConvert");
+
 export abstract class FieldDefinition<T = unknown> {
   _aliases: string[];
   _default: T | undefined;
   _constant: T | undefined;
   _validator: ZodType<T>;
 
-  abstract fromString(string: string): T;
+  abstract fromString(string: string): T | typeof CouldNotConvert;
   abstract clone(): FieldDefinition<T>;
 
   constructor(
@@ -60,7 +62,8 @@ export abstract class FieldDefinition<T = unknown> {
         if (!fromSource.found) continue;
         let value = fromSource.value;
         if (fromSource.needsFromString) {
-          value = this.fromString(fromSource.value);
+          let converted = this.fromString(fromSource.value);
+          if (converted !== CouldNotConvert) value = converted;
         }
         const validation = this._validator.safeParse(value, { path: [alias]});
         if (validation.success) {
@@ -80,13 +83,13 @@ export abstract class FieldDefinition<T = unknown> {
 export class FieldDefinitionString extends FieldDefinition<string> {
   constructor(
     aliases: string[],
-    default_: string | undefined,
+    defaultValue: string | undefined,
     constant: string | undefined,
   ) {
-    super(z.string(), aliases, default_, constant);
+    super(z.string(), aliases, defaultValue, constant);
   }
 
-  static createDefault(): FieldDefinitionString {
+  static create(): FieldDefinitionString {
     return new FieldDefinitionString([], undefined, undefined);
   }
 
@@ -107,13 +110,13 @@ export class FieldDefinitionString extends FieldDefinition<string> {
 export class FieldDefinitionNumber extends FieldDefinition<number> {
   constructor(
     aliases: string[],
-    default_: number | undefined,
+    defaultValue: number | undefined,
     constant: number | undefined,
   ) {
-    super(z.number(), aliases, default_, constant);
+    super(z.number(), aliases, defaultValue, constant);
   }
 
-  static createDefault(): FieldDefinitionNumber {
+  static create(): FieldDefinitionNumber {
     return new FieldDefinitionNumber([], undefined, undefined);
   }
 
@@ -125,7 +128,9 @@ export class FieldDefinitionNumber extends FieldDefinition<number> {
     );
   }
 
-  fromString(string: string): number {
-    return Number(string);
+  fromString(string: string): number | typeof CouldNotConvert {
+    const converted = Number(string);
+    if (isNaN(converted)) return CouldNotConvert;
+    return converted;
   }
 }

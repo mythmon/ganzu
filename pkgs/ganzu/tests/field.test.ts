@@ -1,7 +1,7 @@
 import { expect, test, describe } from "vitest";
-import { FieldDefinition } from "../src/field.ts";
 import { z } from "zod";
 import { FixedSource } from "../src/source.ts";
+import { FieldDefinition, FieldDefinitionNumber, FieldDefinitionString } from "../src/field.ts";
 
 describe("FieldDefinition", () => {
   class TestFieldDefinition extends FieldDefinition {
@@ -109,5 +109,23 @@ describe("FieldDefinition", () => {
       const field2 = field1.optional();
       expect(field1).not.toBe(field2);
     });
+  });
+});
+
+describe("FieldDefinitionString", () => {
+  test("works", () => {
+    const field = FieldDefinitionString.create();
+    const source = new FixedSource({ a: "hello" });
+    const value = field.loadValue("a", [source]);
+    expect(value).toBe("hello");
+  });
+});
+
+describe("FieldDefinitionNumber", () => {
+  test("works", () => {
+    const field = FieldDefinitionNumber.create();
+    const source = new FixedSource({ a: 3 });
+    const value = field.loadValue("a", [source]);
+    expect(value).toBe(3);
   });
 });
