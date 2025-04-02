@@ -1,7 +1,7 @@
 import { expect, test, describe } from "vitest";
-import { z } from "zod";
+import { z, ZodError } from "zod";
+import { FieldDefinition, FieldDefinitionBoolean, FieldDefinitionNumber, FieldDefinitionString } from "../src/field.ts";
 import { FixedSource } from "../src/source.ts";
-import { FieldDefinition, FieldDefinitionNumber, FieldDefinitionString } from "../src/field.ts";
 
 describe("FieldDefinition", () => {
   class TestFieldDefinition extends FieldDefinition {
@@ -127,5 +127,15 @@ describe("FieldDefinitionNumber", () => {
     const source = new FixedSource({ a: 3 });
     const value = field.loadValue("a", [source]);
     expect(value).toBe(3);
+  });
+});
+
+describe("FieldDefinitionBoolean", () => {
+  test("works", () => {
+    const field = FieldDefinitionBoolean.create();
+    const source = new FixedSource({ a: true, b: false, c: "yo" });
+    expect(field.loadValue("a", [source])).toBe(true);
+    expect(field.loadValue("b", [source])).toBe(false);
+    expect(() => field.loadValue("c", [source])).toThrow(ZodError);
   });
 });

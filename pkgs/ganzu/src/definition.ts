@@ -1,4 +1,5 @@
 import {
+  FieldDefinitionBoolean,
   FieldDefinitionNumber,
   FieldDefinitionString,
   type FieldDefinition,
@@ -11,4 +12,5 @@ export type ConfigDefinition<T> = {
 export const g = {
   string: () => FieldDefinitionString.create(),
   number: () => FieldDefinitionNumber.create(),
+  boolean: (opts?: {strict?: boolean}) => FieldDefinitionBoolean.create(opts),
 };

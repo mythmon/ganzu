@@ -7,9 +7,10 @@ describe("Infer", () => {
     const Config = {
       x: g.string(),
       y: g.number(),
+      z: g.boolean(),
     };
 
     type Config = Infer<typeof Config>;
-    expectTypeOf<Config>().toEqualTypeOf<{ x: string; y: number }>();
+    expectTypeOf<Config>().toEqualTypeOf<{ x: string; y: number, z: boolean }>();
   });
 });

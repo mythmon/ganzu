@@ -134,3 +134,48 @@ export class FieldDefinitionNumber extends FieldDefinition<number> {
     return converted;
   }
 }
+
+export class FieldDefinitionBoolean extends FieldDefinition<boolean> {
+  strict: boolean;
+
+  constructor(
+    strict: boolean,
+    aliases: string[],
+    defaultValue: boolean | undefined,
+    constant: boolean | undefined,
+  ) {
+    super(z.boolean(), aliases, defaultValue, constant);
+    this.strict = strict;
+  }
+
+  static create({ strict = false }: { strict?: boolean } = {}): FieldDefinitionBoolean {
+    return new FieldDefinitionBoolean(strict, [], undefined, undefined);
+  }
+
+  override clone(): FieldDefinition<boolean> {
+    return new FieldDefinitionBoolean(
+      this.strict,
+      [...this._aliases],
+      this._default,
+      this._constant,
+    );
+  }
+
+  fromString(string: string): boolean | typeof CouldNotConvert {
+    const lower = string.toLowerCase();
+    if (lower === 'true') {
+      return true;
+    } else if (lower === 'false') {
+      return false;
+    }
+    if (this.strict) {
+      return CouldNotConvert;
+    }
+    if (lower === '1' || lower === 't' || lower === 'y' || lower === 'yes' || lower === 'on') {
+      return true;
+    } else if (lower === '0' || lower === 'f' || lower === 'n' || lower === 'no' || lower === 'off') {
+      return false;
+    }
+    return CouldNotConvert;
+  }
+}
