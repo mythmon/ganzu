@@ -1,6 +1,6 @@
 {
   "name": "ganzu-json",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "JSON source for Ganzu",
   "type": "module",
   "main": "dist/index.js",
@@ -14,14 +14,17 @@
     "type": "git",
     "url": "git+https://github.com/mythmon/ganzu.git"
   },
-  "keywords": ["ganzu", "ganzu-source"],
+  "keywords": [
+    "ganzu",
+    "ganzu-source"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mythmon/ganzu/issues"
   },
   "homepage": "https://github.com/mythmon/ganzu#readme",
   "dependencies": {
-    "ganzu": "0.0.7"
+    "ganzu": "0.0.8"
   },
   "devDependencies": {
     "@tsconfig/node-lts": "^22.0.1",
