@@ -1,4 +1,4 @@
-# ganzu-json
+# ganzu-yaml
 
 Loads configuration values from YAML files or YAML strings for [ganzu](https://npmjs.com/package/ganzu).
 
