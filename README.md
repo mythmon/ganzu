@@ -23,7 +23,7 @@ Ganzu is inspired by [django-configurations](https://django-configurations.readt
 
 ## Name
 
-The word "ganzu" is a Lojban word who's [full English definition][defn] is:
+The word "ganzu" is a Lojban word whose [full English definition][defn] is:
 
 > `x1` organizes `x2` [relative chaos] into `x3` [ordered/organized result] by system/principle(s) `x4`
 
