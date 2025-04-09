@@ -45,7 +45,11 @@ export abstract class FieldDefinition<T = unknown> {
   }
 
   optional<Tn extends T | null>(): FieldDefinition<Tn> {
-    return (this as unknown as FieldDefinition<Tn>).default(null as Tn);
+    return this.#withChanges((f) => {
+      let newField = f as FieldDefinition<Tn>;
+      newField._validator = this._validator.nullable() as unknown as z.ZodType<Tn>;
+      newField._default = null as Tn;
+    }) as FieldDefinition<Tn>;
   }
 
   loadValue(name: string, sources: Source[]): T {

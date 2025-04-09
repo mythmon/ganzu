@@ -109,6 +109,13 @@ describe("FieldDefinition", () => {
       const field2 = field1.optional();
       expect(field1).not.toBe(field2);
     });
+
+    test("works on string fields", () => {
+      const field = FieldDefinitionString.create().optional();
+      const source = new FixedSource({ b: 2 });
+      const value = field.loadValue("a", [source]);
+      expect(value).toBe(null);
+    });
   });
 });
 
