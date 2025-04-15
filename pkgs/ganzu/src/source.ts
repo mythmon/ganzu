@@ -40,11 +40,13 @@ export class FixedSource<T extends Record<string, unknown>> extends Source {
 }
 
 export class EnvSource extends Source {
-  constructor(params: { prefix?: string } = {}) {
+  constructor(params: { prefix?: string; env?: Record<string, string | undefined> } = {}) {
     super();
+    this.#env = params.env ?? process.env;
     this.#prefix = params.prefix ?? "";
   }
 
+  #env: Record<string, string | undefined>;
   #prefix: string;
 
   *nameVariants(name: string): Generator<string, void> {
@@ -55,7 +57,7 @@ export class EnvSource extends Source {
 
   get(key: string): SourceGetResult {
     for (const alias of this.nameVariants(key)) {
-      const envVar = process.env[alias];
+      const envVar = this.#env[alias];
       if (envVar) return { ok: true, found: true, value: envVar, needsFromString: true };
     }
     return { ok: true, found: false };
