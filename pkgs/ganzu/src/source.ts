@@ -1,4 +1,5 @@
 import { constantCase } from "change-case";
+import type { FieldDefinition } from "./field.ts";
 
 export type SourceGetResult =
   | { ok: true; found: false }
@@ -20,7 +21,7 @@ export type SourceGetResult =
     };
 
 export abstract class Source {
-  abstract get(key: string): SourceGetResult;
+  abstract get(key: string, field: FieldDefinition): SourceGetResult;
 }
 
 export class FixedSource<T extends Record<string, unknown>> extends Source {

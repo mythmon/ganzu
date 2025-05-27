@@ -8,3 +8,4 @@ export type { LoadConfigReturn } from "./loader.ts";
 export { loadConfig } from "./loader.ts";
 export type { ConfigDefinition } from "./definition.ts";
 export { g } from "./definition.ts";
+export type { FieldDefinition } from "./field.ts";

@@ -57,6 +57,8 @@ export function baseConfig(dirname: string): ConfigArray {
           { disallowTypeAnnotations: false },
         ],
         "no-shadow": "warn",
+        "@typescript-eslint/no-unnecessary-type-parameters": "off",
+        "@typescript-eslint/consistent-type-definitions": ["warn", "type"],
       },
     },
 

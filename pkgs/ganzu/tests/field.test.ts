@@ -7,18 +7,15 @@ import {
   FieldDefinitionString,
 } from "../src/field.ts";
 import { FixedSource } from "../src/source.ts";
+import type { TypeMap } from "../src/TypeMap.ts";
 
 describe("FieldDefinition", () => {
   class TestFieldDefinition extends FieldDefinition {
-    constructor() {
-      super(z.any(), [], undefined, undefined);
+    constructor(metadata?: TypeMap) {
+      super(z.any(), metadata);
     }
     clone(): FieldDefinition {
-      const next = new TestFieldDefinition();
-      next._aliases = [...this._aliases];
-      next._constant = this._constant;
-      next._default = this._default;
-      return next;
+      return new TestFieldDefinition(new Map([...this._metadata]));
     }
     fromString(string: string): unknown {
       return string;
@@ -120,6 +117,16 @@ describe("FieldDefinition", () => {
       const source = new FixedSource({ b: 2 });
       const value = field.loadValue("a", [source]);
       expect(value).toBe(null);
+    });
+  });
+
+  describe("metadata", () => {
+    test("it should work", () => {
+      // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+      class TestMetadata {}
+      const metadata = new TestMetadata();
+      const field = new TestFieldDefinition().with(metadata);
+      expect(field.getMetadata(TestMetadata)).toBe(metadata);
     });
   });
 });

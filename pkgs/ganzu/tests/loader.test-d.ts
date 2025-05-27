@@ -5,11 +5,11 @@ import { loadConfig } from "../src/loader.ts";
 
 describe("loadConfig", () => {
   test("config type is passed through", () => {
-    interface Config {
+    type Config = {
       a: number;
       b: string;
       c: boolean;
-    }
+    };
 
     const Config: ConfigDefinition<Config> = {
       a: g.number(),
