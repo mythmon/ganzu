@@ -4,7 +4,7 @@ import { g } from "../src/definition.ts";
 import { loadConfig } from "../src/loader.ts";
 
 describe("loadConfig", () => {
-  test("config type is passed through", () => {
+  test("config type is passed through", async () => {
     type Config = {
       a: number;
       b: string;
@@ -17,33 +17,37 @@ describe("loadConfig", () => {
       c: g.boolean(),
     };
 
-    const config = loadConfig(Config, []);
+    const config = await loadConfig(Config, []);
     expectTypeOf(config).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
   });
 
-  test("config type is inferred", () => {
+  test("config type is inferred", async () => {
     const Config = {
       a: g.string(),
       b: g.number(),
       c: g.boolean(),
     };
 
-    const config = loadConfig(Config, []);
+    const config = await loadConfig(Config, []);
     expectTypeOf(config).toEqualTypeOf<{ a: string; b: number; c: boolean }>();
     expectTypeOf(config.a).toEqualTypeOf<string>();
     expectTypeOf(config.b).toEqualTypeOf<number>();
     expectTypeOf(config.c).toEqualTypeOf<boolean>();
   });
 
-  test("optional fields are marked as nullable", () => {
+  test("optional fields are marked as nullable", async () => {
     const Config = {
       a: g.string().optional(),
       b: g.number().optional(),
       c: g.boolean().optional(),
     };
 
-    const config = loadConfig(Config, []);
-    expectTypeOf(config).toEqualTypeOf<{ a: string | null; b: number | null; c: boolean | null }>();
+    const config = await loadConfig(Config, []);
+    expectTypeOf(config).toEqualTypeOf<{
+      a: string | null;
+      b: number | null;
+      c: boolean | null;
+    }>();
     expectTypeOf(config.a).toEqualTypeOf<string | null>();
     expectTypeOf(config.b).toEqualTypeOf<number | null>();
     expectTypeOf(config.c).toEqualTypeOf<boolean | null>();

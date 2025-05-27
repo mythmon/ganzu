@@ -63,7 +63,7 @@ export abstract class FieldDefinition<T = unknown> {
     }) as FieldDefinition<Tn>;
   }
 
-  loadValue(name: string, sources: Source[]): T {
+  async loadValue(name: string, sources: Source[]): Promise<T> {
     const constant = this.getMetadata(FieldConstantValue);
     if (constant) return constant.value as T;
 
@@ -71,7 +71,7 @@ export abstract class FieldDefinition<T = unknown> {
     const { aliases = [] } = this.getMetadata(FieldAliases) ?? {};
     for (const alias of [name, ...aliases]) {
       for (const source of sources) {
-        const fromSource = source.get(alias, this);
+        const fromSource = await source.get(alias, this);
         if (!fromSource.ok) {
           lastValidationProblem = fromSource.error;
           continue;

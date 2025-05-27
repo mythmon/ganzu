@@ -6,10 +6,10 @@ import type { Source } from "./source.ts";
 export type LoadConfigReturn<T, C extends ConfigDefinition<T>> =
   C extends ConfigDefinition<infer R> ? R : never;
 
-export function loadConfig<T, C extends ConfigDefinition<T>>(
+export async function loadConfig<T, C extends ConfigDefinition<T>>(
   configDefinition: C,
   sources: Source[],
-): LoadConfigReturn<T, C> {
+): Promise<LoadConfigReturn<T, C>> {
   const rv: LoadConfigReturn<T, C> = {} as unknown as LoadConfigReturn<T, C>;
   const errors: { name: string; error: ZodError }[] = [];
 
@@ -17,7 +17,7 @@ export function loadConfig<T, C extends ConfigDefinition<T>>(
     const definition = configDefinition[name] as FieldDefinition | undefined;
     if (!definition) continue;
     try {
-      const value = definition.loadValue(name, sources);
+      const value = await definition.loadValue(name, sources);
       rv[name as unknown as keyof LoadConfigReturn<T, C>] = value as LoadConfigReturn<
         T,
         C

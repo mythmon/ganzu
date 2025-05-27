@@ -21,7 +21,7 @@ export type SourceGetResult =
     };
 
 export abstract class Source {
-  abstract get(key: string, field: FieldDefinition): SourceGetResult;
+  abstract get(key: string, field: FieldDefinition): Promise<SourceGetResult>;
 }
 
 export class FixedSource<T extends Record<string, unknown>> extends Source {
@@ -32,7 +32,7 @@ export class FixedSource<T extends Record<string, unknown>> extends Source {
     this.values = values;
   }
 
-  get(key: string): SourceGetResult {
+  async get(key: string): Promise<SourceGetResult> {
     if (key in this.values) {
       return { ok: true, found: true, value: this.values[key], needsFromString: false };
     }
@@ -56,7 +56,7 @@ export class EnvSource extends Source {
     yield constantCase(prefixed);
   }
 
-  get(key: string): SourceGetResult {
+  async get(key: string): Promise<SourceGetResult> {
     for (const alias of this.nameVariants(key)) {
       const envVar = this.#env[alias];
       if (envVar) return { ok: true, found: true, value: envVar, needsFromString: true };

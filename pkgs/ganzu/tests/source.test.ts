@@ -14,10 +14,10 @@ function makeDebugEnv(values: Record<string, string> = {}) {
 }
 
 describe("EnvSource", () => {
-  test("loads the original name and an upcased version of the aname", () => {
+  test("loads the original name and an upcased version of the aname", async () => {
     const { proxyEnv, log } = makeDebugEnv();
     const source = new EnvSource({ env: proxyEnv });
-    expect(source.get("testKey")).toEqual({ found: false, ok: true });
+    await expect(source.get("testKey")).resolves.toEqual({ found: false, ok: true });
     expect(log).toEqual(["testKey", "TEST_KEY"]);
   });
 });

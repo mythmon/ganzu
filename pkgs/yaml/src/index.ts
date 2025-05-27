@@ -27,7 +27,7 @@ export class YamlSource extends ganzu.Source {
     return new YamlSource(content);
   }
 
-  get(key: string): SourceGetResult {
+  async get(key: string): Promise<SourceGetResult> {
     const errors = [];
     for (const document of this.documents) {
       const keepScalar = true;

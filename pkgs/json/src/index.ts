@@ -25,7 +25,7 @@ export class JsonSource extends ganzu.Source {
     return new JsonSource(content);
   }
 
-  get(key: string): SourceGetResult {
+  async get(key: string): Promise<SourceGetResult> {
     const value = this.parsed[key];
     if (value === undefined) {
       return { ok: true, found: false };
