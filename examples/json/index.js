@@ -7,7 +7,7 @@ const Config = {
 };
 
 const sources = [
-  await JsonSource.fromFile("./config.yml"),
+  await JsonSource.fromFile("./config.json"),
 ];
 
 const config = loadConfig(Config, sources);
