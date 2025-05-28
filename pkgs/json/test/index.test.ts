@@ -1,7 +1,6 @@
 import { expect, test } from "vitest";
 import { JsonSource } from "../src/index.ts";
 
-
 test("it works", () => {
   const content = '{"x": 5, "y": "foo"}';
   const source = JsonSource.fromString(content);
@@ -20,6 +19,6 @@ test("it errors on non-scalar values", () => {
   const source = JsonSource.fromString(content);
   expect(source.get("list")).toEqual({
     ok: false,
-    error: new Error("Key 'list' found in document but is not a number, string, or boolean")
+    error: new Error("Key 'list' found in document but is not a number, string, or boolean"),
   });
 });

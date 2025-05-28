@@ -33,6 +33,9 @@ export class JsonSource extends ganzu.Source {
     if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
       return { ok: true, found: true, value, needsFromString: false };
     }
-    return { ok: false, error: new Error(`Key '${key}' found in document but is not a number, string, or boolean`) };
+    return {
+      ok: false,
+      error: new Error(`Key '${key}' found in document but is not a number, string, or boolean`),
+    };
   }
 }

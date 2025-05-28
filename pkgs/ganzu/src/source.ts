@@ -1,21 +1,23 @@
 import { constantCase } from "change-case";
 
 export type SourceGetResult =
-  | { ok: true, found: false }
+  | { ok: true; found: false }
   | {
-    ok: true;
-    found: true;
-    value: string;
-    needsFromString: true;
-  } | {
-    ok: true;
-    found: true;
-    value: unknown;
-    needsFromString: false;
-  } | {
-    ok: false;
-    error: Error;
-  };
+      ok: true;
+      found: true;
+      value: string;
+      needsFromString: true;
+    }
+  | {
+      ok: true;
+      found: true;
+      value: unknown;
+      needsFromString: false;
+    }
+  | {
+      ok: false;
+      error: Error;
+    };
 
 export abstract class Source {
   abstract get(key: string): SourceGetResult;
@@ -45,9 +47,7 @@ export class EnvSource extends Source {
 
   #prefix: string;
 
-  *nameVariants(
-    name: string,
-  ): Generator<string, void> {
+  *nameVariants(name: string): Generator<string, void> {
     const prefixed = this.#prefix + name;
     yield prefixed;
     yield constantCase(prefixed);

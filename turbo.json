@@ -11,6 +11,13 @@
     "publish-package": {
       "dependsOn": ["^build", "^test"],
       "env": ["NODE_AUTH_TOKEN"]
+    },
+    "format": {
+      "cache": false,
+      "outputs": []
+    },
+    "format:check": {
+      "outputs": []
     }
   }
 }

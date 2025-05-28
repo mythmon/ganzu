@@ -9,7 +9,7 @@ When using Ganzu, you define the configuration that you want to load, and separa
 To define a configuration, make a plain JS object that uses `g` to define each field:
 
 ```ts
-import { g } from 'ganzu';
+import { g } from "ganzu";
 
 const Config = {
   port: g.number(),
@@ -20,7 +20,7 @@ const Config = {
 Then define your sources:
 
 ```ts
-import { EnvSource } from 'ganzu';
+import { EnvSource } from "ganzu";
 
 const sources = [new EnvSource()];
 ```
@@ -28,7 +28,7 @@ const sources = [new EnvSource()];
 and finally load the configuration:
 
 ```ts
-import { loadConfig } from 'ganzu';
+import { loadConfig } from "ganzu";
 
 const config = await load(Config, sources);
 ```
@@ -38,9 +38,11 @@ The result will be a plain JS object with the same structure as the definition, 
 To get a concrete version of the type, you can use `Infer`:
 
 ```ts
-import { Infer } from 'ganzu';
+import { Infer } from "ganzu";
 
-const Config = { /* ... */ };
+const Config = {
+  /* ... */
+};
 type Config = Infer<typeof Config>;
 ```
 
@@ -68,7 +70,7 @@ To handle this situation, define two configurations. The second definition shoul
 const BaseConfig = {
   port: g.number(),
   bucketName: g.string(),
-}
+};
 
 const DevConfig = {
   ...BaseConfig,

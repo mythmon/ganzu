@@ -6,11 +6,10 @@ import type { Source } from "./source.ts";
 export type LoadConfigReturn<T, C extends ConfigDefinition<T>> =
   C extends ConfigDefinition<infer R> ? R : never;
 
-export function loadConfig<
-  T,
-  C extends ConfigDefinition<T>,
-  R = LoadConfigReturn<T, C>,
->(configDefinition: C, sources: Source[]): R {
+export function loadConfig<T, C extends ConfigDefinition<T>, R = LoadConfigReturn<T, C>>(
+  configDefinition: C,
+  sources: Source[],
+): R {
   const rv: R = {} as unknown as R;
   const errors: { name: string; error: ZodError }[] = [];
 

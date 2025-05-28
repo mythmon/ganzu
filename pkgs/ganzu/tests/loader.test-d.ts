@@ -18,7 +18,7 @@ describe("loadConfig", () => {
     };
 
     const config = loadConfig(Config, []);
-    expectTypeOf(config).toEqualTypeOf<{ a: number; b: string, c: boolean }>();
+    expectTypeOf(config).toEqualTypeOf<{ a: number; b: string; c: boolean }>();
   });
 
   test("config type is inferred", () => {
@@ -29,7 +29,7 @@ describe("loadConfig", () => {
     };
 
     const config = loadConfig(Config, []);
-    expectTypeOf(config).toEqualTypeOf<{ a: string; b: number, c: boolean }>();
+    expectTypeOf(config).toEqualTypeOf<{ a: string; b: number; c: boolean }>();
     expectTypeOf(config.a).toEqualTypeOf<string>();
     expectTypeOf(config.b).toEqualTypeOf<number>();
     expectTypeOf(config.c).toEqualTypeOf<boolean>();
@@ -43,7 +43,7 @@ describe("loadConfig", () => {
     };
 
     const config = loadConfig(Config, []);
-    expectTypeOf(config).toEqualTypeOf<{ a: string | null; b: number | null, c: boolean | null }>();
+    expectTypeOf(config).toEqualTypeOf<{ a: string | null; b: number | null; c: boolean | null }>();
     expectTypeOf(config.a).toEqualTypeOf<string | null>();
     expectTypeOf(config.b).toEqualTypeOf<number | null>();
     expectTypeOf(config.c).toEqualTypeOf<boolean | null>();

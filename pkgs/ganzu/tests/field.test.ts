@@ -1,6 +1,11 @@
 import { expect, test, describe } from "vitest";
 import { z, ZodError } from "zod";
-import { FieldDefinition, FieldDefinitionBoolean, FieldDefinitionNumber, FieldDefinitionString } from "../src/field.ts";
+import {
+  FieldDefinition,
+  FieldDefinitionBoolean,
+  FieldDefinitionNumber,
+  FieldDefinitionString,
+} from "../src/field.ts";
 import { FixedSource } from "../src/source.ts";
 
 describe("FieldDefinition", () => {

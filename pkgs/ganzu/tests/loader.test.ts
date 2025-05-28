@@ -11,9 +11,7 @@ describe("loadConfig", () => {
       debug: g.boolean().default(false),
     };
 
-    const config = loadConfig(Config, [
-      new FixedSource({ hostname: "localhost", port: 8080 }),
-    ]);
+    const config = loadConfig(Config, [new FixedSource({ hostname: "localhost", port: 8080 })]);
     expect(config).toEqual({ host: "localhost", port: 8080, debug: false });
   });
 
@@ -37,9 +35,7 @@ describe("loadConfig", () => {
         debug: g.boolean(),
       };
 
-      const config = loadConfig(Config, [
-        new FixedStringSource({ port: "8080", debug: "true" }),
-      ]);
+      const config = loadConfig(Config, [new FixedStringSource({ port: "8080", debug: "true" })]);
       expect(config).toEqual({ port: 8080, debug: true });
     });
 
@@ -48,9 +44,7 @@ describe("loadConfig", () => {
         port: g.number(),
       };
 
-      expect(() => loadConfig(Config, [
-        new FixedStringSource({ port: "idk" }),
-      ]))
+      expect(() => loadConfig(Config, [new FixedStringSource({ port: "idk" })]))
         .toThrowErrorMatchingInlineSnapshot(`
           [Error: Failed to load config: port: [
             {
@@ -71,9 +65,7 @@ describe("loadConfig", () => {
         debug: g.boolean(),
       };
 
-      expect(() => loadConfig(Config, [
-        new FixedStringSource({ debug: "sort of" }),
-      ]))
+      expect(() => loadConfig(Config, [new FixedStringSource({ debug: "sort of" })]))
         .toThrowErrorMatchingInlineSnapshot(`
           [Error: Failed to load config: debug: [
             {

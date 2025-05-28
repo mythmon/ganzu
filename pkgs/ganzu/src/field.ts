@@ -36,12 +36,16 @@ export abstract class FieldDefinition<T = unknown> {
 
   default(value: T) {
     const validated = this._validator.parse(value);
-    return this.#withChanges((f) => { f._default = validated; });
+    return this.#withChanges((f) => {
+      f._default = validated;
+    });
   }
 
   constant(value: T) {
     const validated = this._validator.parse(value);
-    return this.#withChanges((f) => { f._constant = validated; });
+    return this.#withChanges((f) => {
+      f._constant = validated;
+    });
   }
 
   optional<Tn extends T | null>(): FieldDefinition<Tn> {
@@ -69,7 +73,7 @@ export abstract class FieldDefinition<T = unknown> {
           let converted = this.fromString(fromSource.value);
           if (converted !== CouldNotConvert) value = converted;
         }
-        const validation = this._validator.safeParse(value, { path: [alias]});
+        const validation = this._validator.safeParse(value, { path: [alias] });
         if (validation.success) {
           return validation.data;
         }
@@ -85,11 +89,7 @@ export abstract class FieldDefinition<T = unknown> {
 }
 
 export class FieldDefinitionString extends FieldDefinition<string> {
-  constructor(
-    aliases: string[],
-    defaultValue: string | undefined,
-    constant: string | undefined,
-  ) {
+  constructor(aliases: string[], defaultValue: string | undefined, constant: string | undefined) {
     super(z.string(), aliases, defaultValue, constant);
   }
 
@@ -98,13 +98,8 @@ export class FieldDefinitionString extends FieldDefinition<string> {
   }
 
   override clone(): FieldDefinition<string> {
-    return new FieldDefinitionString(
-      [...this._aliases],
-      this._default,
-      this._constant,
-    );
+    return new FieldDefinitionString([...this._aliases], this._default, this._constant);
   }
-
 
   fromString(string: string): string {
     return string;
@@ -112,11 +107,7 @@ export class FieldDefinitionString extends FieldDefinition<string> {
 }
 
 export class FieldDefinitionNumber extends FieldDefinition<number> {
-  constructor(
-    aliases: string[],
-    defaultValue: number | undefined,
-    constant: number | undefined,
-  ) {
+  constructor(aliases: string[], defaultValue: number | undefined, constant: number | undefined) {
     super(z.number(), aliases, defaultValue, constant);
   }
 
@@ -125,11 +116,7 @@ export class FieldDefinitionNumber extends FieldDefinition<number> {
   }
 
   override clone(): FieldDefinition<number> {
-    return new FieldDefinitionNumber(
-      [...this._aliases],
-      this._default,
-      this._constant,
-    );
+    return new FieldDefinitionNumber([...this._aliases], this._default, this._constant);
   }
 
   fromString(string: string): number | typeof CouldNotConvert {
@@ -167,17 +154,23 @@ export class FieldDefinitionBoolean extends FieldDefinition<boolean> {
 
   fromString(string: string): boolean | typeof CouldNotConvert {
     const lower = string.toLowerCase();
-    if (lower === 'true') {
+    if (lower === "true") {
       return true;
-    } else if (lower === 'false') {
+    } else if (lower === "false") {
       return false;
     }
     if (this.strict) {
       return CouldNotConvert;
     }
-    if (lower === '1' || lower === 't' || lower === 'y' || lower === 'yes' || lower === 'on') {
+    if (lower === "1" || lower === "t" || lower === "y" || lower === "yes" || lower === "on") {
       return true;
-    } else if (lower === '0' || lower === 'f' || lower === 'n' || lower === 'no' || lower === 'off') {
+    } else if (
+      lower === "0" ||
+      lower === "f" ||
+      lower === "n" ||
+      lower === "no" ||
+      lower === "off"
+    ) {
       return false;
     }
     return CouldNotConvert;

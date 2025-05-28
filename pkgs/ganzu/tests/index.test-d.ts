@@ -11,6 +11,6 @@ describe("Infer", () => {
     };
 
     type Config = Infer<typeof Config>;
-    expectTypeOf<Config>().toEqualTypeOf<{ x: string; y: number, z: boolean }>();
+    expectTypeOf<Config>().toEqualTypeOf<{ x: string; y: number; z: boolean }>();
   });
 });

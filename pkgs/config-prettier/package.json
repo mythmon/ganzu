@@ -1,0 +1,19 @@
+{
+  "name": "@ganzu/config-prettier",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "exports": {
+    ".": "./index.js"
+  },
+  "peerDependencies": {
+    "prettier": "^3.5.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}
