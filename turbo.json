@@ -9,8 +9,12 @@
       "dependsOn": ["^build", "^test"]
     },
     "publish-package": {
-      "dependsOn": ["^build", "^test"],
+      "dependsOn": ["build", "test", "typecheck", "format:check"],
       "env": ["NODE_AUTH_TOKEN"]
+    },
+    "lint": {
+      "dependsOn": ["^build"],
+      "outputs": []
     },
     "format": {
       "cache": false,
@@ -20,8 +24,11 @@
       "outputs": []
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"],
+      "dependsOn": ["^typecheck", "^build"],
       "outputs": []
+    },
+    "ci": {
+      "dependsOn": ["format:check", "build", "test", "typecheck"]
     }
   }
 }
