@@ -18,6 +18,10 @@
     },
     "format:check": {
       "outputs": []
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"],
+      "outputs": []
     }
   }
 }

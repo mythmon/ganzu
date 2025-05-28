@@ -10,7 +10,8 @@
     "build": "tsup",
     "publish-package": "npm run build && npm publish --access public",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "typecheck": "tsc"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@ganzu/config-prettier": "file:../config-prettier",
+    "@ganzu/config-tsc": "file:../config-tsc",
     "@tsconfig/node-lts": "^22.0.1",
     "@tsconfig/node-ts": "^23.6.1",
     "@tsconfig/recommended": "^1.0.8",

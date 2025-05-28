@@ -1,2 +1,2 @@
-import config from "@ganzu/config-prettier";
+import config from "./index.js";
 export default config;

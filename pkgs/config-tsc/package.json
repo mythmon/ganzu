@@ -1,0 +1,15 @@
+{
+  "name": "@ganzu/config-tsc",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "config.json"
+  ],
+  "dependencies": {
+    "@tsconfig/node-lts": "^22.0.1",
+    "@tsconfig/node-ts": "^23.6.1",
+    "@tsconfig/recommended": "^1.0.8",
+    "@tsconfig/strictest": "^2.0.5"
+  }
+}
