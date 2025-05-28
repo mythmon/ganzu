@@ -17,10 +17,6 @@ describe("loadConfig", () => {
 
   describe("string source handling", () => {
     class FixedStringSource<T extends Record<string, string>> extends FixedSource<T> {
-      constructor(values: T) {
-        super(values);
-      }
-
       override get(key: string): SourceGetResult {
         const result = super.get(key);
         if ("value" in result)

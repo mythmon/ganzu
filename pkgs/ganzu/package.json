@@ -12,6 +12,7 @@
     "publish-package": "npm run build && npm publish --access public",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "lint": "eslint --max-warnings 0",
     "typecheck": "tsc"
   },
   "repository": {
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/mythmon/ganzu#readme",
   "devDependencies": {
+    "@ganzu/config-eslint": "file:../config-eslint",
     "@ganzu/config-prettier": "file:../config-prettier",
     "@ganzu/config-tsc": "file:../config-tsc",
     "@tsconfig/node-lts": "^22.0.1",
@@ -31,6 +33,7 @@
     "@tsconfig/recommended": "^1.0.8",
     "@tsconfig/strictest": "^2.0.5",
     "@types/node": "^22.13.13",
+    "eslint": "^9.27.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "tsup": "^8.4.0",

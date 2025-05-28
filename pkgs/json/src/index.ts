@@ -8,7 +8,7 @@ export class JsonSource extends ganzu.Source {
 
   constructor(contents: string) {
     super();
-    this.parsed = JSON.parse(contents);
+    this.parsed = JSON.parse(contents) as Record<string, unknown>;
   }
 
   static fromString(str: string): JsonSource {

@@ -50,7 +50,7 @@ export abstract class FieldDefinition<T = unknown> {
 
   optional<Tn extends T | null>(): FieldDefinition<Tn> {
     return this.#withChanges((f) => {
-      let newField = f as FieldDefinition<Tn>;
+      const newField = f as FieldDefinition<Tn>;
       newField._validator = this._validator.nullable() as unknown as z.ZodType<Tn>;
       newField._default = null as Tn;
     }) as FieldDefinition<Tn>;
@@ -70,7 +70,7 @@ export abstract class FieldDefinition<T = unknown> {
         if (!fromSource.found) continue;
         let value = fromSource.value;
         if (fromSource.needsFromString) {
-          let converted = this.fromString(fromSource.value);
+          const converted = this.fromString(fromSource.value);
           if (converted !== CouldNotConvert) value = converted;
         }
         const validation = this._validator.safeParse(value, { path: [alias] });
