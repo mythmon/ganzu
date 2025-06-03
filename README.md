@@ -13,9 +13,34 @@ This is a monorepo. See the individual packages for usage information and docume
 ## Development
 
 ```sh
+# Install dependencies
 $ npm install
-$ npm run test
+# Run all checks
+$ npm run dev
 ```
+
+There are a few scripts defined in `package.json` that operate on all packages:
+
+- `npm run build` - Bundle and transpile to JS
+- `npm run test` - Run tests
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Run ESLint and fix any auto-fixable issues
+- `npm run format` - Run Prettier and fix any auto-fixable issues
+- `npm run format:check` - Run Prettier, but don't change any files
+
+Additionally, there is a combination of all of these: `npm run dev`, which could be used as the basis of a pre-commit hook.
+
+For more fine-grained tasks, you can change into the individual package you're working on, or use turbo to filter tasks. For example:
+
+```sh
+# Run tests in the ganzu package
+$ npx turbo run test --filter=ganzu
+
+# Run lint in the json package
+$ npx turbo run lint --filter=@ganzu/json
+```
+
+Using turbo this way will also run any dependencies of the package, such as building the ganzu when testing ganzu-json.
 
 ## Inspiration
 

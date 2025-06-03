@@ -6,7 +6,8 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --max-warnings 0"
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "eslint --max-warnings 0 --fix"
   },
   "exports": {
     ".": "./index.js"

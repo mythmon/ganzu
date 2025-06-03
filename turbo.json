@@ -16,6 +16,10 @@
       "dependsOn": ["^build"],
       "outputs": []
     },
+    "lint:fix": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
     "format": {
       "cache": false,
       "outputs": []
@@ -28,7 +32,10 @@
       "outputs": []
     },
     "ci": {
-      "dependsOn": ["format:check", "build", "test", "typecheck"]
+      "dependsOn": ["format:check", "build", "test", "typecheck", "lint"]
+    },
+    "dev": {
+      "dependsOn": ["format", "build", "test", "typecheck", "lint:fix"]
     }
   }
 }

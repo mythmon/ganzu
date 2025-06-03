@@ -8,7 +8,12 @@
   },
   "packageManager": "npm@10.9.2",
   "scripts": {
+    "build": "turbo run build",
     "test": "turbo run test",
-    "build": "turbo run build"
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
+    "dev": "turbo run dev"
   }
 }
