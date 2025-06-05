@@ -1,11 +1,5 @@
 {
   "extends": ["@ganzu/config-tsc/tsconfig.json"],
-  "include": [
-    "./src/**/*.ts",
-    "./tests/**/*.ts",
-    "./*.config.ts",
-    "./eslint.config.ts",
-    ".prettierrc.mjs"
-  ],
+  "include": ["./src/**/*.ts", "./tests/**/*.ts", "./*.js", "./*.ts", ".prettierrc.mjs"],
   "exclude": ["node_modules", "dist"]
 }
